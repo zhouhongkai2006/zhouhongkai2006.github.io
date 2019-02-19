@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/favicon.ico" rel="shortcut icon">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
+    <title>浅析ST表 - dblark's blog</title>
+
+
+    <link href="/css/base.min.css" rel="stylesheet">
+    <link href="/css/project.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/gitalk.css" rel="stylesheet">
+
+
+    <script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+    function getCookie(c_name)
+    {
+    if (document.cookie.length>0)
+      {
+      c_start=document.cookie.indexOf(c_name + "=")
+      if (c_start!=-1)
+        {
+        c_start=c_start + c_name.length+1
+        c_end=document.cookie.indexOf(";",c_start)
+        if (c_end==-1) c_end=document.cookie.length
+        return unescape(document.cookie.substring(c_start,c_end))
+        }
+      }
+    return ""
+    }
+
+    var cookie=getCookie("Language")
+    if (cookie=="")
+    {
+      cookie="pascal"
+    }
+    if (cookie=="pascal")
+    {
+      document.write("<style type=\"text/css\">.c\\+\\+{display:none;}</style>")
+    }
+    if (cookie=="c++")
+    {
+      document.write("<style type=\"text/css\">.pascal{display:none;}</style>")
+    }
+    </script>
+
+</head>
+<body class="page-brand">
+
+
+	 <nav class="menu menu-left nav-drawer nav-drawer-md" id="ui_menu">
+		 <div class="menu-scroll">
+			 <div class="menu-content">
+				 <a class="menu-logo" href="/">周圣杰的博客</a>
+				 <ul class="nav">
+					 <li>
+
+						 <a class="collapsed waves-attach waves-effect" data-toggle="collapse" href="#notes">学习笔记</a>
+						 <ul class="menu-collapse collapse in" id="notes">
+
+							 <li class="active">
+								 <a class="waves-attach" href="/notes/ST.html">浅析ST表</a>
+							 </li>
+							 <li>
+								 <a class="waves-attach" href="/notes/FFT.html">FFT详解</a>
+							 </li>
+
+						 </ul>
+						 <a class="collapsed waves-attach waves-effect" data-toggle="collapse" href="#pascal">Pascal语法</a>
+						 <ul class="menu-collapse collapse in" id="pascal">
+
+							 <li>
+								 <a class="waves-attach" href="/pascal/operator.html">运算符重载</a>
+							 </li>
+
+						 </ul>
+						 <a class="collapsed waves-attach waves-effect" data-toggle="collapse" href="#travels">游记</a>
+						 <ul class="menu-collapse collapse in" id="travels">
+
+							 <li>
+								 <a class="waves-attach" href="/travels/NOIP2018.html">NOIP2018普及组游记</a>
+							 </li>
+
+					 </li>
+
+				 </ul>
+			 </div>
+		 </div>
+	 </nav>
+
+    <header class="header header-transparent header-waterfall ui-header">
+        <ul class="nav nav-list pull-left hidden-md hidden-lg">
+            <li>
+                <a data-toggle="menu" href="#ui_menu">
+                    <span class="icon icon-lg">menu</span>
+                </a>
+            </li>
+        </ul>
+        <span class="header-logo header-affix visible-md-block visible-lg-block margin-right-no" data-offset-top="0" data-spy="affix">
+            <p class="pagetitle">浅析ST表</p>
+        </span>
+
+        <ul class="nav nav-list pull-right">
+            <li>
+                <a data-toggle="menu" href="/">
+                    <span class="avatar avatar-sm"><img alt="icon" src="/favicon.ico"></span>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <main class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
+                    <section class="content-inner margin-top-no">
+                        <br>
+
+<h1 id="st">浅析ST表</h1>
+<blockquote>
+<p>最近不知为何一直在写倍增……</p>
+</blockquote>
+<p>ST表是专门处理RMQ（静态查询区间最大值）问题的一种数据结构。</p>
+<p>它的速度非常快。可以做到$O(nlogn)$的时间建表，$O(1)$的时间查询。</p>
+<p>相对于线段树之类的，它查询的速度不知快了几倍。</p>
+<p>不过，它也有个缺陷：只能解决RMQ问题。</p>
+<h2>倍增</h2>
+<p>先来讲讲倍增。</p>
+<p>看到倍增两个字，你想到了什么？$2^k$！（自然$k\in \mathbb{N}$）</p>
+<p>好。你猜对了。倍增就是跟$2$的次幂有关的。</p>
+<p>打个比方：</p>
+<p>有个人，开着一架飞机，在一些线性的飞机场从左往右飞。比如：</p>
+<p>$$air_1\quad air_2\quad air_3\quad air_4\quad air_5\quad air_6\quad air_7\quad air_8\quad air_9$$</p>
+<p>然而，这个人脱离社会，什么现代化的东西都不会用<del>那他怎么会开飞机</del>。</p>
+<p>他根本不知道他起飞和降落的飞机场之间距离是多少。</p>
+<p>于是，他拿着纸笔，去打表了……</p>
+<p>首先，他从$air_1$起飞，到了$air_2$，他记录下这个$air_1$到$air_2$的距离为$1$……</p>
+<p>以此类推，他最终得出了每个机场分别到其他机场需要多少距离。</p>
+<p>那么，他一共记下了$9\times 9=81$个数据。飞机场少还好，如果多了，不仅他自己忙不过来，而且表也打不完……</p>
+<p>所以就产生了一个办法：我们只记录从某个机场出发飞$2^k$距离的终点机场。</p>
+<p>当然，这数据一下子小多了。用表的时候，只要先找到终点机场附近的一个机场（在起点机场的表上），继续沿着这个机场找下去，直到找到为止。</p>
+<p>不过，这里就只是说明一下倍增的思想而已，也只是说明一下倍增的方便。</p>
+<p>RMQ问题的倍增查询则是$O(1)$的，与这里介绍的不同。</p>
+<h2 id="st-1">ST表</h2>
+<p>懂了倍增，ST表也是挺简单的了。</p>
+<p>这里以静态求区间最大值为例。</p>
+<p>首先，我们建个表：从每个位置开始跑一遍，每遍用的时间复杂度是$O(logn)$，总的复杂度就是$O(nlogn)$。</p>
+<p>自然，求的是这一块长度为$2^k$的区间的最大值。</p>
+<p>不过，为了快一点，最好要把$\lfloor log_2(n)\rfloor$全部预处理出来。</p>
+<p>下面给出建表的代码：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode pascal"><code class="sourceCode pascal"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">procedure</span> build(n:<span class="dt">longint</span>);</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  log_<span class="dv">2</span>[<span class="dv">1</span>]:=<span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="kw">for</span> i:=<span class="dv">2</span> <span class="kw">to</span> n <span class="kw">do</span>             <span class="co">//预处理log2(n)</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    log_<span class="dv">2</span>[i]:=log_<span class="dv">2</span>[i <span class="kw">div</span> <span class="dv">2</span>]+<span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="kw">for</span> i:=<span class="dv">1</span> <span class="kw">to</span> n <span class="kw">do</span>             <span class="co">//一个数的最大值就是它本身</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    f[i,<span class="dv">0</span>]:=a[i];</a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="kw">for</span> j:=<span class="dv">1</span> <span class="kw">to</span> log_<span class="dv">2</span>[n] <span class="kw">do</span>      <span class="co">//枚举区间长度2^j</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="kw">for</span> i:=<span class="dv">1</span> <span class="kw">to</span> n+<span class="dv">1-1</span> <span class="kw">shl</span> i <span class="kw">do</span> <span class="co">//枚举区间开始位置</span></a>
+<a class="sourceLine" id="cb1-10" title="10">      f[i,j]:=max(f[i,j<span class="dv">-1</span>],f[i+<span class="dv">1</span> <span class="kw">shl</span> (j<span class="dv">-1</span>),j<span class="dv">-1</span>]);</a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw">end</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb2-1" title="1"><span class="dt">void</span> build(<span class="dt">int</span> n);</a>
+<a class="sourceLine" id="cb2-2" title="2">{</a>
+<a class="sourceLine" id="cb2-3" title="3">    log_2[<span class="dv">1</span>]=<span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">2</span>;i&lt;=n;i++)     <span class="co">//预处理log2(n)</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    {</a>
+<a class="sourceLine" id="cb2-6" title="6">        log_2[i]=log_2[i/<span class="dv">2</span>]+<span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb2-7" title="7">    }</a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">1</span>;<span class="dv">1</span>&lt;=n;i++)     <span class="co">//一个数的最大值就是它本身</span></a>
+<a class="sourceLine" id="cb2-9" title="9">    {</a>
+<a class="sourceLine" id="cb2-10" title="10">        f[i,<span class="dv">0</span>]=a[i];</a>
+<a class="sourceLine" id="cb2-11" title="11">    }</a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="cf">for</span> (<span class="dt">int</span> j=<span class="dv">1</span>;j&lt;=log_2[n];j++)<span class="co">//枚举区间长度2^j</span></a>
+<a class="sourceLine" id="cb2-13" title="13">    {</a>
+<a class="sourceLine" id="cb2-14" title="14">        <span class="cf">for</span> (<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n+<span class="dv">1</span>-(<span class="dv">1</span>&lt;&lt;j);i++)<span class="co">//枚举区间开始位置</span></a>
+<a class="sourceLine" id="cb2-15" title="15">        {</a>
+<a class="sourceLine" id="cb2-16" title="16">            f[i,j]=max(f[i,j-<span class="dv">1</span>],f[i+(<span class="dv">1</span>&lt;&lt;j-<span class="dv">1</span>),j-<span class="dv">1</span>]);</a>
+<a class="sourceLine" id="cb2-17" title="17">        }</a>
+<a class="sourceLine" id="cb2-18" title="18">    }</a>
+<a class="sourceLine" id="cb2-19" title="19">}</a></code></pre></div>
+<p>我们有了这些信息有什么用呢？怎么实现$O(1)$查询呢？</p>
+<p>举个例子：计算从$a_2$到$a_{10}$的最大值。一共有$9$个数。</p>
+<p>我们知道，$\lfloor log_2(9)\rfloor=3$。所以，我们只要查询从$a_2$开始的$2^3$个数的最大值和$a_{10}$往前的$2^3$个数的最大值再取最大值就行了。</p>
+<p><del>似乎有点绕</del></p>
+<p>我们知道，只用从开始的一个区间，是不可能完全覆盖整个区间的。所以，要再倒着求一次，才能保证得出正确的答案。</p>
+<p>超级简洁的代码：</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode pascal"><code class="sourceCode pascal"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> query(l,r:<span class="dt">longint</span>):<span class="dt">longint</span>;</a>
+<a class="sourceLine" id="cb3-2" title="2"> <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb3-3" title="3"> <span class="kw">exit</span>(max(f[l,log2[(r-l+<span class="dv">1</span>)]],f[r<span class="dv">-1</span> <span class="kw">shl</span> log2[(r-l+<span class="dv">1</span>)]+<span class="dv">1</span>,log2[(r-l+<span class="dv">1</span>)]]);</a>
+<a class="sourceLine" id="cb3-4" title="4"> <span class="kw">end</span>;</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb4-1" title="1"><span class="dt">int</span> query(<span class="dt">int</span> l,<span class="dt">int</span> r);</a>
+<a class="sourceLine" id="cb4-2" title="2">{</a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="cf">return</span> max(f[l,log_2[r-l+<span class="dv">1</span>]],f[r-(<span class="dv">1</span>&lt;&lt;log_2[r-l+<span class="dv">1</span>])+<span class="dv">1</span>,log_2[r-l+<span class="dv">1</span>]]);</a>
+<a class="sourceLine" id="cb4-4" title="4">}</a></code></pre></div>
+<p>总结一下，其实ST表的代码挺简洁的，也很好学。只要了解的倍增的思想就行了。</p>
+
+                    </section>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
+                    <section class="content-inner margin-top-no">
+                        <hr>
+
+                            <p>版权？ 不存在的。</p>
+                            <p><a style="float:left" href="/link.html">友链</a><a style="float:right" href="/about.html">关于我</a></p>
+                            <br>
+                            <p>选择语言：
+                            <p><a style="float:left" href="/setLanguage.html?pascal">Pascal</a><a style="float:right" href="/setLanguage.html?c++">C++</a></p>
+                    </section>
+                </div>
+            </div>
+
+            <div id="gitalk-container"></div>
+            <script src="/js/gitalk.min.js"></script>
+            <script>
+            var gitalk = new Gitalk({
+              clientID: '8fa4b6551a4d0d6a0d68',
+              clientSecret: '829f1d6cc0a2247ae3f33a1744337464d26e65a4',
+              repo: 'zhoushengjie.pw',
+              owner: 'dblark',
+              admin: ['dblark'],
+              id: location.pathname,
+              distractionFreeMode: false
+            })
+            gitalk.render('gitalk-container')
+            </script>
+
+    </main>
+
+
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/base.min.js"></script>
+</body>
+</html>

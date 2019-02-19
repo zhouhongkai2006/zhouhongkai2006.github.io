@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/favicon.ico" rel="shortcut icon">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
+    <title>NOIP2018普及组游记 - dblark's blog</title>
+
+
+    <link href="/css/base.min.css" rel="stylesheet">
+    <link href="/css/project.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/gitalk.css" rel="stylesheet">
+
+
+    <script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+    function getCookie(c_name)
+    {
+    if (document.cookie.length>0)
+      {
+      c_start=document.cookie.indexOf(c_name + "=")
+      if (c_start!=-1)
+        {
+        c_start=c_start + c_name.length+1
+        c_end=document.cookie.indexOf(";",c_start)
+        if (c_end==-1) c_end=document.cookie.length
+        return unescape(document.cookie.substring(c_start,c_end))
+        }
+      }
+    return ""
+    }
+
+    var cookie=getCookie("Language")
+    if (cookie=="")
+    {
+      cookie="pascal"
+    }
+    if (cookie=="pascal")
+    {
+      document.write("<style type=\"text/css\">.c\\+\\+{display:none;}</style>")
+    }
+    if (cookie=="c++")
+    {
+      document.write("<style type=\"text/css\">.pascal{display:none;}</style>")
+    }
+    </script>
+
+</head>
+<body class="page-brand">
+
+
+	 <nav class="menu menu-left nav-drawer nav-drawer-md" id="ui_menu">
+		 <div class="menu-scroll">
+			 <div class="menu-content">
+				 <a class="menu-logo" href="/">周圣杰的博客</a>
+				 <ul class="nav">
+					 <li>
+
+						 <a class="collapsed waves-attach waves-effect" data-toggle="collapse" href="#notes">学习笔记</a>
+						 <ul class="menu-collapse collapse in" id="notes">
+
+							 <li>
+								 <a class="waves-attach" href="/notes/ST.html">浅析ST表</a>
+							 </li>
+							 <li>
+								 <a class="waves-attach" href="/notes/FFT.html">FFT详解</a>
+							 </li>
+
+						 </ul>
+						 <a class="collapsed waves-attach waves-effect" data-toggle="collapse" href="#pascal">Pascal语法</a>
+						 <ul class="menu-collapse collapse in" id="pascal">
+
+							 <li>
+								 <a class="waves-attach" href="/pascal/operator.html">运算符重载</a>
+							 </li>
+
+						 </ul>
+						 <a class="collapsed waves-attach waves-effect" data-toggle="collapse" href="#travels">游记</a>
+						 <ul class="menu-collapse collapse in" id="travels">
+
+							 <li class="active">
+								 <a class="waves-attach" href="/travels/NOIP2018.html">NOIP2018普及组游记</a>
+							 </li>
+
+					 </li>
+
+				 </ul>
+			 </div>
+		 </div>
+	 </nav>
+
+    <header class="header header-transparent header-waterfall ui-header">
+        <ul class="nav nav-list pull-left hidden-md hidden-lg">
+            <li>
+                <a data-toggle="menu" href="#ui_menu">
+                    <span class="icon icon-lg">menu</span>
+                </a>
+            </li>
+        </ul>
+        <span class="header-logo header-affix visible-md-block visible-lg-block margin-right-no" data-offset-top="0" data-spy="affix">
+            <p class="pagetitle">NOIP2018普及组游记</p>
+        </span>
+
+        <ul class="nav nav-list pull-right">
+            <li>
+                <a data-toggle="menu" href="/">
+                    <span class="avatar avatar-sm"><img alt="icon" src="/favicon.ico"></span>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <main class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
+                    <section class="content-inner margin-top-no">
+                        <br>
+
+<h1 id="noip2018">NOIP2018普及组游记</h1>
+<h2 id="day--27">Day -27</h2>
+<p>NOIP初赛。</p>
+<p>因为这次初赛的举办地点在余姚中学，所以就自己回家了。</p>
+<p>但是不幸的是，在早上，莫名其妙的眼镜被别人打碎了。</p>
+<p>那只能去配了。不然考试怎么办。</p>
+<p>急忙回家，准备上高速。发现取卡机坏了，没卡……</p>
+<p>等了5min，工作人员来取卡了。一直按啊按，还是取不出来（因为根本没卡）。</p>
+<p>又过了5min，工作人员突然意识到没卡的问题，才去拿了一张卡来。</p>
+<p>于是等了10min，总算上了高速，回家。</p>
+<p>到家之后，找到病历本直接去配眼镜。等了15min。</p>
+<p>中午随便吃了一点。</p>
+<p>到余姚中学，先和老师同学们都打了招呼。</p>
+<p>进入考场，开始啥也没干，静等试卷发下。</p>
+<p>后来发现同班的巨佬FSQ跟我同一个考场，便愉快的和他聊了起来。</p>
+<p>发试卷了。</p>
+<p>看到选择题，感觉非常可怕。</p>
+<p>一道拼RP题（就是第5题），显然要错。</p>
+<p>然后查找啊，排列组合啊感觉很难，就都算错了。过于紧张。</p>
+<p>问题求解不难。非常开心。<del>我主要丢分的地方</del></p>
+<p>阅读程序除T3外都不难，不过我也有时间做T3。</p>
+<p>但是：把T3函数里的-看成了+，然后模拟的时候运算量特别大，重点是错了……</p>
+<p><del>我还算了好几遍</del></p>
+<p>所以-8pts。</p>
+<p>完善程序T1显然。T2第一眼看到懵逼。</p>
+<p>然后做一个复读机，又暴力模拟了几次程序，竟然做对了。</p>
+<p>最终分数86。</p>
+<h2 id="day--26~-20">Day -26~-20</h2>
+<p>焦急等待分数线。</p>
+<p>在此之间一直听说ZJ的分数线高达90，所以非常害怕凉凉。那就要AFO了。</p>
+<p>还好后来出来不到80。</p>
+<h2 id="day--19~-8">Day -19~-8</h2>
+<p>因为要期中考试，所以要拼命肝文化课。</p>
+<p>然而一点兴趣也没有，还是忙于搞OI。</p>
+<p><del>每天在晚读前偷偷溜去机房玩一会</del></p>
+<h2 id="day--7~-6">Day -7~-6</h2>
+<p>马上要期中考试了。</p>
+<p>但我并不想复习。</p>
+<p>在家里自学算法。</p>
+<h2 id="day--5~-4">Day -5~-4</h2>
+<p>期中考试Day 1~2。</p>
+<p>果然凉凉了。</p>
+<h2 id="day--3~-1">Day -3~-1</h2>
+<p>停课搞OI了……</p>
+<p>老师把往年的NOIP真题都拿出来给我们当膜你赛了，然后次次rank -1。、</p>
+<p><del>没关系反正是攒rp</del></p>
+<h2 id="day-0">Day 0</h2>
+<p>上午又是膜你赛。总算开心的到了rank 1。</p>
+<p>中午随便吃了点东西，去小卖部买了许多薯片、其他零食以及肥宅快乐水，就出发去杭州了。</p>
+<p>到学军又是打招呼，然后吃晚饭，去旅馆。</p>
+<p>一整晚没睡觉，一直在嗨皮。</p>
+<p>我们大多数人都去了两间相连的房间，中途我还去旅馆大堂的小卖部买了点零食以及方便面。（到午夜关门）</p>
+<h2 id="day-1">Day 1</h2>
+<p>早上还在嗨皮，但是大家都开始看电视了。</p>
+<p>凌晨2点的时候很多人都睡觉了，所以我就回了自己的房间看电视。</p>
+<p>3点时觉得很困，喝了杯咖啡，奇迹般的睡着了。</p>
+<p>早上起来去吃自助餐，种类很少，不过吃起来不错。</p>
+<p>上午就呆在休息室里，没事情好干，玩了一上午的天黑请闭眼。</p>
+<p>吃了中饭，买了瓶咖啡进考场，准备考试。</p>
+<p>现场监考老师说不要动电脑，但我处于个人习惯，还是在D盘新建了个文件夹，然后重启。</p>
+<p>惊喜：我这电脑装了5个系统！（包括Windows和Ubuntu）</p>
+<p>看来我不怕什么程序不兼容的问题了（不过Pascal本来就没什么兼容问题嘛）。</p>
+<p>看了看提供的安装包，有fpc dev-cpp vim emacs和sublime。然而个人习惯用npp……</p>
+<p>随机装了个sublime。fpc是必装的。</p>
+<p>考场里为了安全，我直接用sublime写代码，脚本编译并比对文件。</p>
+<p>事实上fpc的默认编译选项是不带错误检查的。所以这很危险。不过大样例一测看输出结果就知道什么错了。</p>
+<p>等了10min，密码下发了。是改革开放40年。</p>
+<p>解密，解压，看题。</p>
+<p>T1标题统计，zz题目，跟去年一样。肯定不会错。20s搞定。</p>
+<p>T2龙虎斗，我非常注意，因为每次膜你赛我T2都会错。</p>
+<p>果然，看了看数据范围，要开int64/long long！</p>
+<p>不过按照我的惯例，我只开一个int64/long long的变量，然后其他靠强制类型转换。</p>
+<p><del>不过这样做很冒险</del></p>
+<p>这道题目第一想法是计算龙虎势力的差距，就是正负加权和啊。</p>
+<p>然后每个点都枚举一遍，比较加权和的绝对值就好了。花了15min。</p>
+<p>T3太坑了……不过显然DP。</p>
+<p>我用我的玄学大法，写了个显然不对的$O(n^2)$DP。</p>
+<p>具体我也忘记怎么写了。</p>
+<p>然后花了3h，给DP进行各种玄学优化，最后跟大样例只差一点点了。</p>
+<p>后来公布程序以后我发现我的程序应对各种随机数据特别好，特别开心。</p>
+<p>可是被CCF最后卡到只有30pts……可恶的吸金F。只拿钱。</p>
+<p>最后距离比赛结束只有15min了。只好去看T4。</p>
+<p>第一预感是某些从底部向上合并的东西，还有就是hash玄学拿分。</p>
+<p>但是似乎来不及了，只好打爆搜。</p>
+<p>非常好打，5min打完。一测大样例：0.3s。感觉会被卡。结果CCF用了新机子……</p>
+<p>最后检查了一下文件就静等考试结束了。</p>
+<p>走出考场，同学们的个人感觉都是要凉，250pts差不多了。</p>
+<p>吃完晚饭，就回学校了。</p>
+<h2 id="day-2~9">Day 2~9</h2>
+<p>等待分数。</p>
+<p>自测很好，375pts。洛谷上360pts。</p>
+<h2 id="day-10">Day 10</h2>
+<p>CCF果然又咕了。</p>
+<h2 id="day-11">Day 11</h2>
+<p>没想到ZJ还是挺快的，只拖了一天。</p>
+<p>被CCF恶意卡到了330。</p>
+<p>反正一等有了。</p>
+<p>不等分数线了。</p>
+<blockquote>
+<p>后续：因为文化课被老师批死了。</p>
+</blockquote>
+
+                    </section>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
+                    <section class="content-inner margin-top-no">
+                        <hr>
+
+                            <p>版权？ 不存在的。</p>
+                            <p><a style="float:left" href="/link.html">友链</a><a style="float:right" href="/about.html">关于我</a></p>
+                            <br>
+                            <p>选择语言：
+                            <p><a style="float:left" href="/setLanguage.html?pascal">Pascal</a><a style="float:right" href="/setLanguage.html?c++">C++</a></p>
+                    </section>
+                </div>
+            </div>
+
+            <div id="gitalk-container"></div>
+            <script src="/js/gitalk.min.js"></script>
+            <script>
+            var gitalk = new Gitalk({
+              clientID: '8fa4b6551a4d0d6a0d68',
+              clientSecret: '829f1d6cc0a2247ae3f33a1744337464d26e65a4',
+              repo: 'zhoushengjie.pw',
+              owner: 'dblark',
+              admin: ['dblark'],
+              id: location.pathname,
+              distractionFreeMode: false
+            })
+            gitalk.render('gitalk-container')
+            </script>
+
+    </main>
+
+
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/base.min.js"></script>
+</body>
+</html>
