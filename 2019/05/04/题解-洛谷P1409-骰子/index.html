@@ -110,18 +110,18 @@
       }
   </style>
 
-  <meta name="description" content="原题链接：https://www.luogu.org/problemnew/show/P4863 这道题目直接暴力肯定$\rm TLE$，所以需要数论优化使复杂度降为$\rm O(B)$ $\rm My$ $\rm Code$12345678910111213141516171819202122#include &amp;lt;cstdio&amp;gt;int a,b;long long ans,r,s,t;u">
-<meta name="keywords" content="数论,枚举暴力,分块">
+  <meta name="description" content="题目链接：https://www.luogu.org/problemnew/show/P1409 考虑$\rm DP$，转移的时候第三种情况可能成环 那么先转移前两种，再带着算即可。 12345678910111213141516171819202122#include &amp;lt;cstdio&amp;gt;int a,b;long long ans,r,s,t;using namespace std;in">
+<meta name="keywords" content="数论">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[题解]洛谷P4863 JerryC Loves Driving">
-<meta property="og:url" content="http://yoursite.com/2019/05/04/题解-洛谷P4863-JerryC-Loves-Driving/index.html">
+<meta property="og:title" content="[题解]洛谷P1409 骰子">
+<meta property="og:url" content="http://yoursite.com/2019/05/04/题解-洛谷P1409-骰子/index.html">
 <meta property="og:site_name" content="zhouhongkai&#39;s blog">
-<meta property="og:description" content="原题链接：https://www.luogu.org/problemnew/show/P4863 这道题目直接暴力肯定$\rm TLE$，所以需要数论优化使复杂度降为$\rm O(B)$ $\rm My$ $\rm Code$12345678910111213141516171819202122#include &amp;lt;cstdio&amp;gt;int a,b;long long ans,r,s,t;u">
+<meta property="og:description" content="题目链接：https://www.luogu.org/problemnew/show/P1409 考虑$\rm DP$，转移的时候第三种情况可能成环 那么先转移前两种，再带着算即可。 12345678910111213141516171819202122#include &amp;lt;cstdio&amp;gt;int a,b;long long ans,r,s,t;using namespace std;in">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-04T02:34:20.000Z">
+<meta property="og:updated_time" content="2019-05-04T02:45:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[题解]洛谷P4863 JerryC Loves Driving">
-<meta name="twitter:description" content="原题链接：https://www.luogu.org/problemnew/show/P4863 这道题目直接暴力肯定$\rm TLE$，所以需要数论优化使复杂度降为$\rm O(B)$ $\rm My$ $\rm Code$12345678910111213141516171819202122#include &amp;lt;cstdio&amp;gt;int a,b;long long ans,r,s,t;u">
+<meta name="twitter:title" content="[题解]洛谷P1409 骰子">
+<meta name="twitter:description" content="题目链接：https://www.luogu.org/problemnew/show/P1409 考虑$\rm DP$，转移的时候第三种情况可能成环 那么先转移前两种，再带着算即可。 12345678910111213141516171819202122#include &amp;lt;cstdio&amp;gt;int a,b;long long ans,r,s,t;using namespace std;in">
 
 
 
@@ -129,7 +129,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/05/04/题解-洛谷P4863-JerryC-Loves-Driving/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/04/题解-洛谷P1409-骰子/">
 
 
 
@@ -139,7 +139,7 @@
   };
 </script>
 
-  <title>[题解]洛谷P4863 JerryC Loves Driving | zhouhongkai's blog</title>
+  <title>[题解]洛谷P1409 骰子 | zhouhongkai's blog</title>
   
 
 
@@ -371,7 +371,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/04/题解-洛谷P4863-JerryC-Loves-Driving/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/04/题解-洛谷P1409-骰子/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhouhongkai">
@@ -388,7 +388,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">[题解]洛谷P4863 JerryC Loves Driving
+          <h1 class="post-title" itemprop="name headline">[题解]洛谷P1409 骰子
 
               
             
@@ -414,7 +414,7 @@
                 
               
 
-              <time title="创建时间：2019-05-04 09:37:48 / 修改时间：10:34:20" itemprop="dateCreated datePublished" datetime="2019-05-04T09:37:48+08:00">2019-05-04</time>
+              <time title="创建时间：2019-05-04 10:43:36 / 修改时间：10:45:02" itemprop="dateCreated datePublished" datetime="2019-05-04T10:43:36+08:00">2019-05-04</time>
             
 
             
@@ -460,10 +460,10 @@
       
 
       
-        <p>原题链接：<a href="https://www.luogu.org/problemnew/show/P4863" target="_blank" rel="noopener">https://www.luogu.org/problemnew/show/P4863</a></p>
-<p>这道题目直接暴力肯定$\rm TLE$，所以需要数论优化使复杂度降为$\rm O(B)$</p>
-<p>$\rm My$ $\rm Code$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> a,b;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans,r,s,t;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=b; i+=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        r=a/i<span class="number">-1</span>;</span><br><span class="line">        s=(a-r*i-i)*(r+<span class="number">1</span>);</span><br><span class="line">        r=(r+<span class="number">1</span>)*r/<span class="number">2</span>*i;</span><br><span class="line">        t=s+r;</span><br><span class="line">        r=(b+<span class="number">1</span>)/i<span class="number">-1</span>;</span><br><span class="line">        s=(b+<span class="number">1</span>-r*i-i)*(r+<span class="number">1</span>);</span><br><span class="line">        r=(r+<span class="number">1</span>)*r/<span class="number">2</span>*i;</span><br><span class="line">        <span class="keyword">if</span> (i&amp;<span class="number">1</span>) ans-=s+r-t; <span class="keyword">else</span> ans+=s+r-t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
+        <p>题目链接：<a href="https://www.luogu.org/problemnew/show/P1409" target="_blank" rel="noopener">https://www.luogu.org/problemnew/show/P1409</a></p>
+<p>考虑$\rm DP$，转移的时候第三种情况可能成环</p>
+<p>那么先转移前两种，再带着算即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> a,b;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans,r,s,t;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=b; i+=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        r=a/i<span class="number">-1</span>;</span><br><span class="line">        s=(a-r*i-i)*(r+<span class="number">1</span>);</span><br><span class="line">        r=(r+<span class="number">1</span>)*r/<span class="number">2</span>*i;</span><br><span class="line">        t=s+r;</span><br><span class="line">        r=(b+<span class="number">1</span>)/i<span class="number">-1</span>;</span><br><span class="line">        s=(b+<span class="number">1</span>-r*i-i)*(r+<span class="number">1</span>);</span><br><span class="line">        r=(r+<span class="number">1</span>)*r/<span class="number">2</span>*i;</span><br><span class="line">        <span class="keyword">if</span> (i&amp;<span class="number">1</span>) ans-=s+r-t; <span class="keyword">else</span> ans+=s+r-t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -487,10 +487,6 @@
         <div class="post-tags">
           
             <a href="/tags/数论/" rel="tag"># 数论</a>
-          
-            <a href="/tags/枚举暴力/" rel="tag"># 枚举暴力</a>
-          
-            <a href="/tags/分块/" rel="tag"># 分块</a>
           
         </div>
       
@@ -555,8 +551,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/04/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/05/04/题解-洛谷P4863-JerryC-Loves-Driving/" rel="next" title="[题解]洛谷P4863 JerryC Loves Driving">
+                <i class="fa fa-chevron-left"></i> [题解]洛谷P4863 JerryC Loves Driving
               </a>
             
           </div>
@@ -564,10 +560,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/04/题解-洛谷P1409-骰子/" rel="prev" title="[题解]洛谷P1409 骰子">
-                [题解]洛谷P1409 骰子 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
