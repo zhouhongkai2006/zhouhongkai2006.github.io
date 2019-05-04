@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[[题解]洛谷P1941 飞扬的小鸟]]></title>
+    <url>%2F2019%2F05%2F04%2F%E9%A2%98%E8%A7%A3-%E6%B4%9B%E8%B0%B7P1941-%E9%A3%9E%E6%89%AC%E7%9A%84%E5%B0%8F%E9%B8%9F%2F</url>
+    <content type="text"><![CDATA[原题链接：https://www.luogu.org/problemnew/show/P1941 就是直接动态规划，注意特判即可 $\rm My$ $\rm Code$ 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;cstring&gt;using namespace std;const int N=10005,M=1005,INF=10000007;int n,m,k,p,l,h,ans;int f[M],t[M],x[N],y[N],b[N][3];void work()&#123; bool flag; memset(f,0,sizeof(f)); f[0]=INF; ans=0; for (int i=1; i&lt;=n; i++) &#123; memset(t,127,sizeof(t)); int u=x[i-1],d=y[i-1]; for (int j=u+1; j&lt;=m; j++) t[j]=min(t[j],min(f[j-u],t[j-u])+1); for (int j=m-u; j&lt;=m; j++) t[m]=min(t[m],min(f[j],t[j])+1); for (int j=1; j&lt;=m-d; j++) t[j]=min(t[j],f[j+d]); if (b[i][0]) &#123; for (int j=0; j&lt;=m; j++) if (j&lt;=b[i][1]||j&gt;=b[i][2]) t[j]=INF; bool flag=1; for (int j=1; j&lt;=m; j++) if (t[j]&lt;INF) &#123; flag=0; break; &#125; if (flag) &#123; printf("0\n%d",ans); return; &#125; ans++; &#125; memcpy(f,t,sizeof(f)); &#125; ans=INF; for (int i=1; i&lt;=m; i++) ans=min(ans,f[i]); printf("1\n%d",ans);&#125;int main()&#123; memset(b,0,sizeof(b)); scanf("%d%d%d",&amp;n,&amp;m,&amp;k); for (int i=0; i&lt;=n-1; i++) scanf("%d%d",&amp;x[i],&amp;y[i]); for (int i=1; i&lt;=k; i++) &#123; scanf("%d%d%d",&amp;p,&amp;l,&amp;h); b[p][0]=1; b[p][1]=l; b[p][2]=h; &#125; work(); return 0;&#125;]]></content>
+      <tags>
+        <tag>枚举暴力</tag>
+        <tag>动态规划</tag>
+        <tag>背包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[题解]洛谷P1131 [ZJOI2007]时态同步]]></title>
+    <url>%2F2019%2F05%2F04%2F%E9%A2%98%E8%A7%A3-%E6%B4%9B%E8%B0%B7P1131-ZJOI2007-%E6%97%B6%E6%80%81%E5%90%8C%E6%AD%A5%2F</url>
+    <content type="text"><![CDATA[原题链接：https://www.luogu.org/problemnew/show/P1131 题意让我们用最少的代价把叶子节点到根节点的距离调成相同 显然，我们调整靠近根节点的树枝，其下叶子节点距离根节点的距离都会增加，所以，调整越靠根节点的树枝调整的代价越少。 为了方便作图，效果直观，在此我们用节点深度类比距离 所以我们可以先找到最深的叶子节点 这样我们就可以保证用最少的代价把所有叶子节点调整到同一深度 我们理解了这个问题就可以设计dfs了 每次调整的代价都是$dis[x]-(dis[ver[i]+edge[i])$，把它累加即可 $\rm My$ $\rm Code$ 123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;cstdio&gt;#include&lt;algorithm&gt;using namespace std;const int N=500010;int head[N],ver[N],next[N],tot,n,st,edge[N];long long ans,dis[N];void add(int x,int y,int z)&#123; ver[++tot]=y; edge[tot]=z; next[tot]=head[x]; head[x]=tot;&#125;void dfs(int x,int fa)&#123; for (int i=head[x];i;i=next[i]) &#123; int y=ver[i],z=edge[i]; if (y==fa) continue; dfs(y,x); dis[x]=max(dis[x],dis[y]+z); &#125; for (int i=head[x];i;i=next[i]) &#123; int y=ver[i],z=edge[i]; if (y==fa) continue; ans+=dis[x]-(dis[y]+z); &#125;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;st); for (int i=1;i&lt;n;i++) &#123; int x,y,z; scanf("%d%d%d",&amp;x,&amp;y,&amp;z); add(x,y,z);add(y,x,z); &#125; dfs(st,0); printf("%lld\n",ans); return 0;&#125;]]></content>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>树形结构</tag>
+        <tag>浙江省选</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[[题解]洛谷P1409 骰子]]></title>
     <url>%2F2019%2F05%2F04%2F%E9%A2%98%E8%A7%A3-%E6%B4%9B%E8%B0%B7P1409-%E9%AA%B0%E5%AD%90%2F</url>
-    <content type="text"><![CDATA[题目链接：https://www.luogu.org/problemnew/show/P1409 考虑$\rm DP$，转移的时候第三种情况可能成环 那么先转移前两种，再带着算即可。 12345678910111213141516171819202122#include &lt;cstdio&gt;int a,b;long long ans,r,s,t;using namespace std;int main()&#123; int a,b; scanf("%d%d",&amp;a,&amp;b); for (int i=1; i&lt;=b; i+=1) &#123; r=a/i-1; s=(a-r*i-i)*(r+1); r=(r+1)*r/2*i; t=s+r; r=(b+1)/i-1; s=(b+1-r*i-i)*(r+1); r=(r+1)*r/2*i; if (i&amp;1) ans-=s+r-t; else ans+=s+r-t; &#125; printf("%lld\n",ans); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[题目链接：https://www.luogu.org/problemnew/show/P1409 考虑$\rm DP$，转移的时候第三种情况可能成环 那么先转移前两种，再带着算即可。 $\rm My$ $\rm Code$ 12345678910111213141516171819202122#include &lt;cstdio&gt;int a,b;long long ans,r,s,t;using namespace std;int main()&#123; int a,b; scanf("%d%d",&amp;a,&amp;b); for (int i=1; i&lt;=b; i+=1) &#123; r=a/i-1; s=(a-r*i-i)*(r+1); r=(r+1)*r/2*i; t=s+r; r=(b+1)/i-1; s=(b+1-r*i-i)*(r+1); r=(r+1)*r/2*i; if (i&amp;1) ans-=s+r-t; else ans+=s+r-t; &#125; printf("%lld\n",ans); return 0;&#125;]]></content>
       <tags>
         <tag>数论</tag>
       </tags>
@@ -11,7 +31,7 @@
   <entry>
     <title><![CDATA[[题解]洛谷P4863 JerryC Loves Driving]]></title>
     <url>%2F2019%2F05%2F04%2F%E9%A2%98%E8%A7%A3-%E6%B4%9B%E8%B0%B7P4863-JerryC-Loves-Driving%2F</url>
-    <content type="text"><![CDATA[原题链接：https://www.luogu.org/problemnew/show/P4863 这道题目直接暴力肯定$\rm TLE$，所以需要数论优化使复杂度降为$\rm O(B)$ $\rm My$ $\rm Code$12345678910111213141516171819202122#include &lt;cstdio&gt;int a,b;long long ans,r,s,t;using namespace std;int main()&#123; int a,b; scanf("%d%d",&amp;a,&amp;b); for (int i=1; i&lt;=b; i+=1) &#123; r=a/i-1; s=(a-r*i-i)*(r+1); r=(r+1)*r/2*i; t=s+r; r=(b+1)/i-1; s=(b+1-r*i-i)*(r+1); r=(r+1)*r/2*i; if (i&amp;1) ans-=s+r-t; else ans+=s+r-t; &#125; printf("%lld\n",ans); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[原题链接：https://www.luogu.org/problemnew/show/P4863 这道题目直接暴力肯定$\rm TLE$，所以需要数论优化使复杂度降为$\rm O(B)$ $\rm My$ $\rm Code$ 12345678910111213141516171819202122#include &lt;cstdio&gt;int a,b;long long ans,r,s,t;using namespace std;int main()&#123; int a,b; scanf("%d%d",&amp;a,&amp;b); for (int i=1; i&lt;=b; i+=1) &#123; r=a/i-1; s=(a-r*i-i)*(r+1); r=(r+1)*r/2*i; t=s+r; r=(b+1)/i-1; s=(b+1-r*i-i)*(r+1); r=(r+1)*r/2*i; if (i&amp;1) ans-=s+r-t; else ans+=s+r-t; &#125; printf("%lld\n",ans); return 0;&#125;]]></content>
       <tags>
         <tag>数论</tag>
         <tag>枚举暴力</tag>
